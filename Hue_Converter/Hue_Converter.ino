@@ -4,22 +4,52 @@ void setup() {
 
 void loop() { 
 
- int red, green, blue;
- int hue = 830;
+ int red = 255;
+ int green = 0;
+ int blue = 0;
+ int hue = 0;
  toRGB(hue, red, green, blue);
  
-  Serial.print(hue);
-  Serial.print(": ");
-  Serial.print(red);
-  Serial.print(", ");
-  Serial.print(green);
-  Serial.print(", ");
-  Serial.println(blue);
+//Serial.print(hue);
+//Serial.print(": ");
+//Serial.print(red);
+//Serial.print(", ");
+//Serial.print(green);
+//Serial.print(", ");
+//Serial.println(blue);
   
-// toRGB(830);
-// toRGB(1029);
-// toRGB(439);
-// toRGB(873);
+//toRGB(830);
+//toRGB(1029);
+//toRGB(439);
+//toRGB(873);
+
+ if(digitalRead(2) == LOW){//Left
+   hue--;
+   if(hue <= 0){hue = hue + 1530;}
+ }
+ 
+ if(digitalRead(3)== LOW){//Down
+   toRGB(hue, red, green, blue);
+   red *= .1;
+   green *= .1;
+   blue *= .1;
+ }
+   
+ if(digitalRead(4) == LOW){//Right
+   hue++;
+   if(hue >= 1530){hue = hue - 1530;}
+ } 
+ 
+ if(digitalRead(5) == LOW){//Up
+   toRGB(hue, red, green, blue);
+   red *= 1.1;
+   green *= 1.1;
+   blue *= 1.1;
+ }
+ 
+ if(digitalRead(6) == LOW)
+   Serial.println("Center");
+
 
 }
 
