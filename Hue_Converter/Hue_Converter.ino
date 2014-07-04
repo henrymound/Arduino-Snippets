@@ -1,5 +1,12 @@
+#include <Adafruit_NeoPixel.h>
+#define PIN 6
+
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(60, PIN, NEO_GRB + NEO_KHZ800);
+
 void setup() {
   Serial.begin(9600);
+  strip.begin();
+  strip.show();
 }
 
 void loop() { 
@@ -47,8 +54,12 @@ void loop() {
    blue *= 1.1;
  }
  
- if(digitalRead(6) == LOW)
-   Serial.println("Center");
+ if(digitalRead(6) == LOW){
+   hue += 255;
+ }
+ 
+ for(uint16_t i=0; i<strip.numPixels(); i++) {strip.setPixelColor(i, strip.Color(red, green, blue));}
+ strip.show();
 
 
 }
