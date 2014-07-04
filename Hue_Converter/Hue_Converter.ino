@@ -4,7 +4,6 @@ void setup() {
 
 void loop() { 
 
- toRGB(234);
  toRGB(341);
  toRGB(830);
  toRGB(1029);
