@@ -3,68 +3,76 @@
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(60, PIN, NEO_GRB + NEO_KHZ800);
 
+  int red = 255;
+  int green = 0;
+  int blue = 0;
+  int hue = 0;
+
 void setup() {
-  Serial.begin(9600);
+ // Serial.begin(9600);
   strip.begin();
   strip.show();
 }
 
 void loop() { 
-
- int red = 255;
- int green = 0;
- int blue = 0;
- int hue = 0;
- toRGB(hue, red, green, blue);
- 
-//Serial.print(hue);
-//Serial.print(": ");
-//Serial.print(red);
-//Serial.print(", ");
-//Serial.print(green);
-//Serial.print(", ");
-//Serial.println(blue);
+  
+//  Serial.print(hue);
+//  Serial.print(": ");
+//  Serial.print(red);
+//  Serial.print(", ");
+//  Serial.print(green);
+//  Serial.print(", ");
+//  Serial.println(blue);
   
 //toRGB(830);
 //toRGB(1029);
 //toRGB(439);
 //toRGB(873);
 
- if(digitalRead(2) == LOW){//Left
-   hue--;
+ if(digitalRead(7) == LOW){//Left
+   hue-=3;
    if(hue <= 0){hue = hue + 1530;}
+   toRGB(hue, red, green, blue);
+ // Serial.print("Left");
  }
  
  if(digitalRead(3)== LOW){//Down
+   red *= .1; if(red <= 0) red = 0;
+   green *= .1; if(green <= 0) green = 0;
+   blue *= .1; if(blue <= 0) blue = 0;
    toRGB(hue, red, green, blue);
-   red *= .1;
-   green *= .1;
-   blue *= .1;
+ //  Serial.print("Down");
  }
    
  if(digitalRead(4) == LOW){//Right
-   hue++;
-   if(hue >= 1530){hue = hue - 1530;}
+   hue+=3;
+   if(hue >= 1530){hue = 0;}
+ //  Serial.print("Right");
  } 
  
  if(digitalRead(5) == LOW){//Up
+   red *= 1.1; if(red >= 255)red = 255;
+   green *= 1.1; if(green >= 255)green = 255;
+   blue *= 1.1; if(blue >= 255)blue = 255;
    toRGB(hue, red, green, blue);
-   red *= 1.1;
-   green *= 1.1;
-   blue *= 1.1;
+   //Serial.print("Up");
  }
  
- if(digitalRead(6) == LOW){
+ if(digitalRead(2) == LOW){
    hue += 255;
+   if(hue >= 1530)hue = 0;
+ //  Serial.print("Center");
  }
  
+ toRGB(hue, red, green, blue);
+  
  for(uint16_t i=0; i<strip.numPixels(); i++) {strip.setPixelColor(i, strip.Color(red, green, blue));}
  strip.show();
 
 
 }
 
-void static toRGB(int hue, int red, int green, int blue){
+void static toRGB(int h, int r, int g, int b){
   /*Converts the int hue to three different ints in an array
   the first int is red, second - green, third - blue each on a 255 scale*/
   
