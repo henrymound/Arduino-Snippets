@@ -1,4 +1,4 @@
-\#include <Adafruit_NeoPixel.h>
+#include <Adafruit_NeoPixel.h>
 #define PIN 6
 
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(60, PIN, NEO_GRB + NEO_KHZ800);
@@ -9,7 +9,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(60, PIN, NEO_GRB + NEO_KHZ800);
   int hue = 0;
 
 void setup() {
-//  Serial.begin(9600);
+  Serial.begin(9600);
   strip.begin();
   strip.show();
 }
@@ -29,43 +29,42 @@ void loop() {
 //toRGB(439);
 //toRGB(873);
 
- if(digitalRead(7) == LOW){//Left
+ if(digitalRead(2) == LOW){//Left
    hue-=3;
    if(hue <= 0){hue = hue + 1530;}
    toRGB(hue, red, green, blue);
- // Serial.print("Left");
+//  Serial.print("Left");
  }
  
- if(digitalRead(3)== LOW){//Down
-   red = red - 1; if (red <= 0)red = 0;
-   green = green - 1; if(red <= 0)green = 0;
-   blue = blue - 1; if(red <= 0)blue = 0;
+ if(digitalRead(5)== LOW){//Down
+   if(red >= 0 && blue >= 0 && green >= 0){red = red - 1; if (red <= 0){red = 0;}}
+   if(red >= 0 && blue >= 0 && green >= 0){green = green - 1; if(green <= 0){green = 0;}}
+   if(red >= 0 && blue >= 0 && green >= 0){blue = blue - 1; if(blue <= 0){blue = 0;}}
 //   toRGB(hue, red, green, blue);
 //   Serial.print("Down");
  }
    
  if(digitalRead(4) == LOW){//Right
    hue+=3;
-   if(hue >= 1530){hue = 0;
+   if(hue >= 1530){hue = 0;}
    toRGB(hue, red, green, blue);
-  }
- //  Serial.print("Right");
+//   Serial.print("Right");
  } 
  
- if(digitalRead(5) == LOW){//Up
-   red = red + 1; if(red >= 255)red = 255;
-   green = green + 1; if(green >= 255)green = 255;
-   blue = blue + 1; if(blue >= 255)blue = 255;
+ if(digitalRead(3) == LOW){//Up
+   if(red < 255 && green < 255 && blue < 255){red = red + 1; if(red >= 255){red = 255;}}
+   if(red < 255 && green < 255 && blue < 255){green = green + 1; if(green >= 255){green = 255;}}
+   if(red < 255 && green < 255 && blue < 255){blue = blue + 1; if(blue >= 255){blue = 255;}}
 //   toRGB(hue, red, green, blue);
-//   Serial.print("Up");
+   Serial.print("Up");
  }
  
- if(digitalRead(2) == LOW){
+ if(digitalRead(7) == LOW){
   
    hue += 255;
    if(hue >= 1530)hue = 0;
    delay(200);
- //  Serial.print("Center");
+   Serial.print("Center");
  }
  
 // toRGB(hue, red, green, blue);
