@@ -7,7 +7,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(60, PIN, NEO_GRB + NEO_KHZ800);
   int green = 0;
   int blue = 0;
   int hue = 0;
-
+  int CHANGE_BY = 3;  
 void setup() {
   Serial.begin(9600);
   strip.begin();
@@ -30,7 +30,7 @@ void loop() {
 //toRGB(873);
 
  if(digitalRead(2) == LOW){//Left
-   hue-=3;
+   hue-=CHANGE_BY;
    if(hue <= 0){hue = hue + 1530;}
    toRGB(hue, red, green, blue);
 //  Serial.print("Left");
@@ -45,7 +45,7 @@ void loop() {
  }
    
  if(digitalRead(4) == LOW){//Right
-   hue+=3;
+   hue+=CHANGE_BY;
    if(hue >= 1530){hue = 0;}
    toRGB(hue, red, green, blue);
 //   Serial.print("Right");
