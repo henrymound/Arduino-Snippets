@@ -1,6 +1,8 @@
 void setup() {
   Serial.begin(9600);
-  while (!Serial) {;}
+  while (!Serial) {
+      break;
+    }
 
   Serial.println("send any byte and I'll tell you everything I can about it");
   Serial.println();
