@@ -16,7 +16,7 @@ void loop() {
   int sensorReading = analogRead(analogPin);
   int ledLevel = map(sensorReading, 0, 1023, 0, ledCount);
 
-  for (int thisLed = 0; thisLed < ledCount; thisLed++) {
+  for (int thisLed = 1; thisLed < ledCount; thisLed++) {
     if (thisLed < ledLevel) {
       digitalWrite(ledPins[thisLed], HIGH);
     } 
