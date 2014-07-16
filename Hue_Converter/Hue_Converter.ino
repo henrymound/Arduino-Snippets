@@ -7,7 +7,8 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(60, PIN, NEO_GRB + NEO_KHZ800);
   int green = 0;
   int blue = 0;
   int hue = 0;
-  int CHANGE_BY = 3;  
+  int CHANGE_BY = 3; 
+  
 void setup() {
   Serial.begin(9600);
   strip.begin();
@@ -15,19 +16,6 @@ void setup() {
 }
 
 void loop() { 
-  
-//  Serial.print(hue);
-//  Serial.print(": ");
-//  Serial.print(red);
-//  Serial.print(", ");
-//  Serial.print(green);
-//  Serial.print(", ");
-//  Serial.println(blue);
-  
-//toRGB(830);
-//toRGB(1029);
-//toRGB(439);
-//toRGB(873);
 
  if(digitalRead(2) == LOW){//Left
    hue-=CHANGE_BY;
@@ -40,7 +28,6 @@ void loop() {
    if(red >= 0 && blue >= 0 && green >= 0){red = red - 1; if (red <= 0){red = 0;}}
    if(red >= 0 && blue >= 0 && green >= 0){green = green - 1; if(green <= 0){green = 0;}}
    if(red >= 0 && blue >= 0 && green >= 0){blue = blue - 1; if(blue <= 0){blue = 0;}}
-//   toRGB(hue, red, green, blue);
 //   Serial.print("Down");
  }
    
@@ -67,7 +54,6 @@ void loop() {
    Serial.print("Center");
  }
  
-// toRGB(hue, red, green, blue);
   
  for(uint16_t i=0; i<strip.numPixels(); i++) {strip.setPixelColor(i, strip.Color(red, green, blue));}
  strip.show();
